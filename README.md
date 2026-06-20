@@ -8,4 +8,4 @@ A web application built using Python Flask, HTML, and CSS.
 - **Conditional Logic:** Evaluates text submission data and toggles completion status properties.
 
 ### 🌐 Live Demo
-Check out the live app running on the cloud here: [://pythonanywhere.com](https://://pythonanywhere.com)
+Check out the live app running on the cloud here: https://ruchirathod.pythonanywhere.com/
