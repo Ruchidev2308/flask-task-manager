@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persistent Python Backend App</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background: #121212; color: #ffffff; }
+        .container { max-width: 500px; background: #1e1e1e; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); margin: 0 auto; }
+        h1 { margin-top: 0; color: #00adb5; font-size: 24px; text-align: center; }
+        form { display: flex; gap: 10px; margin-bottom: 20px; }
+        input[type="text"] { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #333; background: #252525; color: white; outline: none; }
+        button { background: #00adb5; color: white; border: none; padding: 10px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #008087; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        li { padding: 12px; background: #252525; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #00adb5; }
+        
+        /* CSS styling for completed items */
+        .completed { text-decoration: line-through; color: #888888; }
+        .task-text { text-decoration: none; color: white; cursor: pointer; display: flex; gap: 10px; align-items: center; }
+        .task-text:hover { color: #00adb5; }
+        
+        .del-btn { color: #ff5555; text-decoration: none; font-weight: bold; font-size: 18px; padding: 0 5px; }
+        .del-btn:hover { color: #ff2222; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Tasks Backend (Saved)</h1>
+        
+        <form action="/add" method="POST">
+            <input type="text" name="task" placeholder="Enter a new task..." required autocomplete="off">
+            <button type="submit">Add Task</button>
+        </form>
+
+        <ul>
+            {% for todo in todos %}
+            <li>
+                <!-- Clicking this text link updates the backend via the /toggle route -->
+                <a href="/toggle/{{ todo.id }}" class="task-text">
+                    <!-- JINJA IF STATEMENT: Changes formatting based on 'done' status -->
+                    {% if todo.done %}
+                        <span class="completed">✅ {{ todo.task }}</span>
+                    {% else %}
+                        <span>⬜ {{ todo.task }}</span>
+                    {% endif %}
+                </a>
+                
+                <a href="/delete/{{ todo.id }}" class="del-btn">×</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
